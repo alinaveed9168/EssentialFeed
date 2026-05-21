@@ -11,13 +11,16 @@ class RemoteFeedLoader {
     
 }
 
-class httpClient {
-    var requestURL: URL?
+class HttpClient {
+    var requestedURL: URL?
 }
 
 class RemoteFeedLoaderTest {
     
-    func test_init() {
-        
+    func test_init_doest_not_request_from_URL() {
+        let client = HttpClient()
+        let sut = RemoteFeedLoader()
+        XCTAssertNil(client.requestedURL)
     }
 }
+
