@@ -24,8 +24,6 @@ protocol HttpClient {
     func get(from url: URL)
 }
 
-
-
 final class RemoteFeedLoaderTest: XCTestCase {
     
     func test_init_doest_not_request_from_URL() {
