@@ -8,19 +8,33 @@
 import XCTest
 
 class RemoteFeedLoader {
-    
-}
-
-class HttpClient {
-    var requestedURL: URL?
-}
-
-class RemoteFeedLoaderTest {
-    
-    func test_init_doest_not_request_from_URL() {
-        let client = HttpClient()
-        let sut = RemoteFeedLoader()
-        XCTAssertNil(client.requestedURL)
+    func load()  {
+        HttpClient.shared.requestedURL = URL(string: "https://dummy.com")
     }
 }
 
+class HttpClient {
+    static let shared = HttpClient()
+    private init() {}
+    var requestedURL: URL?
+}
+
+final class RemoteFeedLoaderTest: XCTestCase {
+    
+    func test_init_doest_not_request_from_URL() {
+        let client = HttpClient.shared
+        _ = RemoteFeedLoader()
+        XCTAssertNil(client.requestedURL)
+    }
+    
+    func test_load_requests_from_URL() {
+        let client = HttpClient.shared
+        let sut = RemoteFeedLoader()
+        sut.load()
+        XCTAssertNotNil(client.requestedURL)
+    }
+}
+
+// constraction Dinjection
+// property Dinjection
+// parameter Dinjection
