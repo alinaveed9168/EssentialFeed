@@ -18,15 +18,16 @@ class RemoteFeedLoaderTest: XCTestCase {
     func test_load_requestsDataFromURL() {
         let url = URL(string: "https://a-given-dummy.com")!
         let (sut,clientSpy) = makeSUT(url: url)
-        sut.load()
+        sut.load{ _ in }
         XCTAssertEqual(clientSpy.requestURLs, [url])
     }
     
     func test_loadTwice_requestsDataFromURLTwice() {
         let url = URL(string: "https://a-given-dummy.com")!
         let (sut,clientSpy) = makeSUT(url: url)
-        sut.load()
-        sut.load()
+        sut.load{ _ in }
+        sut.load{ _ in }
+
         
         XCTAssertEqual(clientSpy.requestURLs, [url,url])
     }
