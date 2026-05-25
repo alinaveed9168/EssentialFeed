@@ -70,9 +70,9 @@ private class FeedMapper {
             )
         }
     }
-    
-    func map(from root: Data,httpResponse: HTTPURLResponse) throws -> [FeedItem] {
-        guard httpResponse.statusCode == 200 else {
+    static let ok_200 = 200
+    static func map(from root: Data,httpResponse: HTTPURLResponse) throws -> [FeedItem] {
+        guard httpResponse.statusCode == ok_200 else {
             throw RemoteFeedLoader.Error.invalidData
         }
         let root = try JSONDecoder().decode(Root.self, from: root)
